@@ -1,0 +1,252 @@
+/* =======================================================
+   GLOBAL THEME: Deep Space / Entropy Gradient
+   ======================================================= */
+
+:root {
+  --bg-main: #0D0F26;         /* deep navy for full background */
+  --bg-card: #1D203A;         /* slightly lighter navy for card containers */
+  --accent-blue: #7A8BFF;     /* primary glow color */
+  --accent-glow: #B7C9FF;     /* soft blue for hovers/highlights */
+  --highlight: #FFCA3A;       /* warm contrast (energy/heat) */
+  --text-main: #E8ECFF;       /* soft white/blue text color */
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  color: var(--text-main);
+}
+
+
+/* =======================================================
+   BODY
+   ======================================================= */
+
+body {
+  background: radial-gradient(circle at top, #14162f, var(--bg-main));
+  min-height: 100vh;
+  padding-top: 130px; /* creates room for fixed header */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+/* =======================================================
+   HEADER
+   ======================================================= */
+
+#header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 40px;
+  background: linear-gradient(to bottom, #11152d, #0D0F26);
+
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  z-index: 1000;
+}
+
+/* glow strip */
+#header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(to right, var(--accent-blue), var(--highlight));
+}
+
+/* logo + title */
+#logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#header-img {
+  height: 75px;
+  filter: drop-shadow(0 0 15px var(--accent-glow));
+}
+
+#header-title {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* navigation links */
+#nav-bar {
+  display: flex;
+  gap: 25px;
+}
+
+#nav-bar a {
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: 0.25s;
+}
+
+#nav-bar a:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  box-shadow: 0 0 12px var(--accent-blue);
+}
+
+
+
+/* =======================================================
+   VIDEO SECTION
+   ======================================================= */
+
+.video-wrapper {
+  /* allow wide layout but keep it responsive */
+  width: min(800px, 65vw);   /* at most 1200px, otherwise 95% of viewport */
+  margin: 40px auto;
+  position: relative;
+  border-radius: 18px;
+  overflow: visible;          /* allow the glow to extend outside if needed */
+  box-sizing: border-box;     /* ensure consistent sizing */
+
+  /* no inner padding — we want iframe to use full available width */
+  padding: 0;
+  background: transparent;    /* background kept transparent so the pseudo-glow is visible */
+}
+
+/* Create the large glow as a visual layer behind the iframe without shrinking it */
+.video-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -18px; /* extends the glow beyond the wrapper */
+  border-radius: 22px;
+  background: radial-gradient(circle at center, rgba(91,84,240,0.18), rgba(0,0,0,0.7));
+  z-index: 0;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* The iframe — forced to fill the wrapper's full width */
+#video {
+  display: block;             /* remove inline quirks */
+  width: 100% !important;     /* always fill wrapper width */
+  max-width: 800px;         /* explicit large max width for high-quality playback */
+  margin: 0 auto;             /* center if wrapper is wider than iframe (rare) */
+  aspect-ratio: 16 / 9;
+  height: auto;               /* keep ratio-based height */
+  border: 3px solid #B3A130;  /* gold-ish border */
+  border-radius: 12px;
+  z-index: 1;                 /* place above the ::before glow */
+  box-shadow: 0 0 14px rgba(122,139,255,0.25);
+  box-sizing: border-box;
+  image-rendering: auto;
+}
+
+
+
+/* =======================================================
+   GRID LAYOUT
+   ======================================================= */
+
+#content-grid {
+  display: grid;
+  width: 90%;
+  max-width: 1200px;
+
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+
+  margin-bottom: 80px;
+}
+
+/* Every card on the grid */
+.grid-card {
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: 20px;
+
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  transition: 0.25s ease;
+}
+
+.grid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 22px var(--accent-blue);
+}
+
+.grid-card h2 {
+  margin-bottom: 12px;
+  color: var(--accent-blue);
+}
+
+/* News list styling */
+.news-list {
+  
+  padding-left: 0;
+}
+
+.news-list li {
+  margin-bottom: 10px;
+}
+
+.news-list a:hover {
+  color: var(--highlight);
+}
+
+#credit-list li {
+  list-style: none;
+}
+
+
+
+/* =======================================================
+   RESPONSIVE BREAKPOINTS
+   ======================================================= */
+
+@media (max-width: 768px) {
+
+  #header {
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  #nav-bar {
+    margin-top: 15px;
+    gap: 12px;
+  }
+
+  #header-title {
+    font-size: 1.4rem;
+  }
+
+  #header-img {
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  #nav-bar a {
+    font-size: 1rem;
+  }
+
+  .grid-card {
+    padding: 18px;
+  }
+}
+
+/* Small-screen tweak: allow the iframe to be almost full-bleed on tiny viewports */
+@media (max-width: 520px) {
+  .video-wrapper {
+    width: 98vw;
+  }
+  #video {
+    max-width: 100%;
+  }
+}
