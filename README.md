@@ -23,9 +23,7 @@ The objective of this project is to help learners understand entropy in simple t
 entropy-website/
 ├── index.html
 ├── style.css
-└── assets/
-    ├── images/
-    └── videos/
+└── entropy_diagram.png
 ```
 
 ## Technologies Used
